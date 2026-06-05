@@ -1,6 +1,6 @@
 hda = 0
 vnb = "01/01/2026"
-vna = "31/12/2029"
+vna = "12/31/2029"
 caname = "RAA-A-16376"
 clientcsr = "raa16376"
 clientpem = "raa16376"
