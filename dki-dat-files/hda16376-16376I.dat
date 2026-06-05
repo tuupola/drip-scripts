@@ -1,0 +1,6 @@
+vnb="03/02/2025"
+vna="02/27/2026"
+caname = "HDA-I-16376-16376"
+clientcsr = "hda16376-16376I"
+clientpem = "hda16376-16376I"
+entitycert = False

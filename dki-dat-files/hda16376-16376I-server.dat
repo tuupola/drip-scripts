@@ -1,0 +1,6 @@
+raa = 16376
+hda = 16376
+suiteid = 5
+serialnumberbits = 23
+cakey = "hda16376-16376I"
+selfsign = False

@@ -1,0 +1,7 @@
+raa = 16376
+hda = 0
+suiteid = 5
+serialnumberbits = 15
+cakey = "raa16376"
+LOA_str = "1.3.27.16.1.1.0.1"
+selfsign = True

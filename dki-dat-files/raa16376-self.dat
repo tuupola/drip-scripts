@@ -1,0 +1,7 @@
+hda = 0
+vnb = "03/01/2025"
+vna = "03/01/2027"
+caname = "RAA-A-16376"
+clientcsr = "raa16376"
+clientpem = "raa16376"
+entitycert = False

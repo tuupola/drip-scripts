@@ -1,0 +1,419 @@
+PS1="rgm: dki-try2$ "
+PS1="[\u \W]$ "
+PROMPT_DIRTRIM=1
+
+
+# create RAA
+# SN is there just because script needs it.
+python csr-gen.py --keyname=raa16376 --serialnumber=x2344 --keynameexists=Y
+openssl req -text -noout -in raa16376csr.pem
+
+python endorse.py --serverdat=raa16376-server-self --commandfile=raa16376-self
+CA
+DET: 2001003ffe000005269d7fc3271febb5
+DET: 2001:003f:fe00:0005:269d:7fc3:271f:ebb5
+Client
+DET: 2001003ffe000005269d7fc3271febb5
+DET: 2001:003f:fe00:0005:269d:7fc3:271f:ebb5
+Client HI: 9229539f2ae6a961d1c24977455da98162e53efc98df9eb30f725376993a7275
+Client Endorsement by CA( 136.0  bytes): 67c294506b84fb502001003ffe000005269d7fc3271febb59229539f2ae6a961d1c24977455da98162e53efc98df9eb30f725376993a72752001003ffe000005269d7fc3271febb563f576f4b7a8ddf2df29efdf5d7ee040cf93828edf98f77885f60900f2be39c2851a66fc440fd8eeb541daa1cab964319fb6df4ee985ebbc0aa889a69bace608
+client SN: x2344
+openssl x509 -noout -text -in raa16376.pem
+Certificate:   461 bytes
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 29126 (0x71c6)
+        Signature Algorithm: ED25519
+        Issuer: CN=2001003ffe000005269d7fc3271febb5
+        Validity
+            Not Before: Mar  1 00:01:00 2025 GMT
+            Not After : Mar  1 23:59:00 2027 GMT
+        Subject: CN=DRIP-RAA-A-16376
+        Subject Public Key Info:
+            Public Key Algorithm: ED25519
+                ED25519 Public-Key:
+                pub:
+                    92:29:53:9f:2a:e6:a9:61:d1:c2:49:77:45:5d:a9:
+                    81:62:e5:3e:fc:98:df:9e:b3:0f:72:53:76:99:3a:
+                    72:75
+        X509v3 extensions:
+            X509v3 Subject Alternative Name: critical
+                IP Address:2001:3F:FE00:5:269D:7FC3:271F:EBB5
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+    Signature Algorithm: ED25519
+    Signature Value:
+        32:c8:27:74:fc:30:9d:25:86:05:3a:6b:58:e7:e5:d5:60:0e:
+        e0:51:3b:a1:dd:1c:45:d1:ea:f2:e0:e4:0a:3c:08:68:3f:49:
+        ca:bf:48:87:6e:19:ae:ff:a3:f1:75:22:81:b6:75:e7:ef:a6:
+        e5:15:c6:2d:aa:01:b9:c4:b6:07
+openssl x509 -noout -text -in raa16376pkix.pem
+Certificate:  530 bytes
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 17995 (0x464b)
+        Signature Algorithm: ED25519
+        Issuer: CN=2001003ffe000005269d7fc3271febb5
+        Validity
+            Not Before: Mar  1 00:01:00 2025 GMT
+            Not After : Mar  1 23:59:00 2027 GMT
+        Subject: CN=DRIP-RAA-A-16376
+        Subject Public Key Info:
+            Public Key Algorithm: ED25519
+                ED25519 Public-Key:
+                pub:
+                    92:29:53:9f:2a:e6:a9:61:d1:c2:49:77:45:5d:a9:
+                    81:62:e5:3e:fc:98:df:9e:b3:0f:72:53:76:99:3a:
+                    72:75
+        X509v3 extensions:
+            X509v3 Subject Alternative Name: critical
+                IP Address:2001:3F:FE00:5:269D:7FC3:271F:EBB5
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Certificate Policies: 
+                Policy: 1.3.27.16.1.1.0.1
+            X509v3 Subject Key Identifier: 
+                20:01:00:3F:FE:00:00:05:26:9D:7F:C3:27:1F:EB:B5
+    Signature Algorithm: ED25519
+    Signature Value:
+        0f:3d:25:31:a3:76:86:4f:d8:b7:12:85:72:83:c3:4d:40:1c:
+        06:43:c6:b7:a6:4a:46:30:9e:e3:26:48:67:97:c0:ab:36:12:
+        b3:9a:aa:69:4b:bb:74:f4:c3:d1:8b:5e:cd:d4:34:64:79:70:
+        05:b0:78:bb:ec:b8:0a:97:36:03
+openssl x509 -in raa16376.pem -out raa16376.der -outform der
+openssl x509 -in raa16376pkix.pem -out raa16376pkix.der -outform der
+
+DER: 300 bytes & 350 bytes
+
+
+# create HDA Auth
+# SN is there just because script needs it.
+openssl pkey -in hda16376-16376Aprv.pem  -text -noout
+python csr-gen.py --keyname=hda16376-16376A --serialnumber=x5589 --keynameexists=Y
+openssl req -text -noout -in hda16376-16376Acsr.pem
+python endorse.py --serverdat=raa16376-server --commandfile=hda16376-16376A
+
+CA
+DET: 2001003ffe000005269d7fc3271febb5
+DET: 2001:003f:fe00:0005:269d:7fc3:271f:ebb5
+Client
+DET: 2001003ffe3ff805e805a98f9df15e2d
+DET: 2001:003f:fe3f:f805:e805:a98f:9df1:5e2d
+Client HI: b82b27f86b013468fe48d85b54f01bf65385f302ab2e136dc51a3b929c88ce5a
+Client Endorsement by CA( 136.0  bytes): 67c3e5d069c9f5402001003ffe3ff805e805a98f9df15e2db82b27f86b013468fe48d85b54f01bf65385f302ab2e136dc51a3b929c88ce5a2001003ffe000005269d7fc3271febb58061559d101c6e00016537636a22db8206d904b40d6f14aef0e41e4e9a5e1acdbb9b7a6696460250daf129b61fb0c087f82b371cf0af6c0b31d17cae5b77160e
+HDA SN: x5589
+
+openssl x509 -noout -text -in hda16376-16376A.pem
+Certificate:   469 bytes
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 17146 (0x42fa)
+        Signature Algorithm: ED25519
+        Issuer: CN=2001003ffe000005269d7fc3271febb5
+        Validity
+            Not Before: Mar  2 00:01:00 2025 GMT
+            Not After : Mar 30 23:59:00 2026 GMT
+        Subject: CN=DRIP-HDA-A-16376-16376
+        Subject Public Key Info:
+            Public Key Algorithm: ED25519
+                ED25519 Public-Key:
+                pub:
+                    b8:2b:27:f8:6b:01:34:68:fe:48:d8:5b:54:f0:1b:
+                    f6:53:85:f3:02:ab:2e:13:6d:c5:1a:3b:92:9c:88:
+                    ce:5a
+        X509v3 extensions:
+            X509v3 Subject Alternative Name: critical
+                IP Address:2001:3F:FE3F:F805:E805:A98F:9DF1:5E2D
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+    Signature Algorithm: ED25519
+    Signature Value:
+        96:3c:f1:7c:51:e6:3f:e5:0d:0a:7e:d3:d4:de:24:d7:99:63:
+        10:d5:22:39:38:1d:5c:dc:a6:52:bd:b2:ee:87:77:87:35:33:
+        b2:b1:97:3c:c8:8a:85:b6:23:83:cc:b3:5d:68:1a:c2:25:3e:
+        35:d2:93:22:ac:44:c5:c4:f8:02
+openssl x509 -noout -text -in hda16376-16376Apkix.pem
+Certificate:   579 bytes
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1696 (0x6a0)
+        Signature Algorithm: ED25519
+        Issuer: CN=2001003ffe000005269d7fc3271febb5
+        Validity
+            Not Before: Mar  2 00:01:00 2025 GMT
+            Not After : Mar 30 23:59:00 2026 GMT
+        Subject: CN=DRIP-HDA-A-16376-16376
+        Subject Public Key Info:
+            Public Key Algorithm: ED25519
+                ED25519 Public-Key:
+                pub:
+                    b8:2b:27:f8:6b:01:34:68:fe:48:d8:5b:54:f0:1b:
+                    f6:53:85:f3:02:ab:2e:13:6d:c5:1a:3b:92:9c:88:
+                    ce:5a
+        X509v3 extensions:
+            X509v3 Subject Alternative Name: critical
+                IP Address:2001:3F:FE3F:F805:E805:A98F:9DF1:5E2D
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Certificate Policies: 
+                Policy: 1.3.27.16.1.1.0.1
+            X509v3 Subject Key Identifier: 
+                20:01:00:3F:FE:3F:F8:05:E8:05:A9:8F:9D:F1:5E:2D
+            X509v3 Authority Key Identifier: 
+                20:01:00:3F:FE:00:00:05:26:9D:7F:C3:27:1F:EB:B5
+    Signature Algorithm: ED25519
+    Signature Value:
+        c6:91:ea:64:fe:9f:96:06:00:4b:6b:55:08:ca:e6:12:d4:bd:
+        49:28:01:3b:16:5d:bc:1f:e1:a5:15:7f:df:fd:0e:bd:f2:22:
+        43:0e:98:cb:d9:61:b2:e2:c8:18:1e:7d:44:51:a1:61:90:5b:
+        66:67:b4:ed:c4:77:53:bc:2a:0b
+
+openssl x509 -in hda16376-16376A.pem -out hda16376-16376A.der -outform der
+openssl x509 -in hda16376-16376Apkix.pem -out hda16376-16376Apkix.der -outform der
+
+DER: 306 bytes & 386 bytes
+
+
+# create HDA Issue
+# SN is there just because script needs it.
+#openssl pkey -in hda16376-16376Iprv.pem  -text -noout
+python csr-gen.py --keyname=hda16376-16376I --serialnumber=x5789
+openssl req -text -noout -in hda16376-16376Icsr.pem
+python endorse.py --serverdat=hda16376-16376A-server --commandfile=hda16376-16376I
+CA
+DET: 2001003ffe3ff805e805a98f9df15e2d
+DET: 2001:003f:fe3f:f805:e805:a98f:9df1:5e2d
+Client
+DET: 2001003ffe3ff805aa16ed2392f6f0cb
+DET: 2001:003f:fe3f:f805:aa16:ed23:92f6:f0cb
+Client HI: cc75d75df778734d2e5b682f6ff938abf10a1026f788dca99945cbddacf3d723
+Client Endorsement by CA( 136.0  bytes): 67c3e5d069a124d02001003ffe3ff805aa16ed2392f6f0cbcc75d75df778734d2e5b682f6ff938abf10a1026f788dca99945cbddacf3d7232001003ffe3ff805e805a98f9df15e2df6bb7c846c8da369d2ce114d5458ea47a2ca7675193170c0bb94824544f68b237cd190295d9576102adb56422c762c8630bf749306c7f606afbb3a6a996d7807
+client SN: x5789
+
+openssl x509 -noout -text -in hda16376-16376I.pem
+Certificate:   469 bytes
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 18546 (0x4872)
+        Signature Algorithm: ED25519
+        Issuer: CN=2001003ffe3ff805e805a98f9df15e2d
+        Validity
+            Not Before: Mar  2 00:01:00 2025 GMT
+            Not After : Feb 27 23:59:00 2026 GMT
+        Subject: CN=DRIP-HDA-I-16376-16376
+        Subject Public Key Info:
+            Public Key Algorithm: ED25519
+                ED25519 Public-Key:
+                pub:
+                    cc:75:d7:5d:f7:78:73:4d:2e:5b:68:2f:6f:f9:38:
+                    ab:f1:0a:10:26:f7:88:dc:a9:99:45:cb:dd:ac:f3:
+                    d7:23
+        X509v3 extensions:
+            X509v3 Subject Alternative Name: critical
+                IP Address:2001:3F:FE3F:F805:AA16:ED23:92F6:F0CB
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+    Signature Algorithm: ED25519
+    Signature Value:
+        b3:45:78:44:4a:93:1b:64:73:84:1b:ac:64:14:ae:ae:99:01:
+        e2:24:9a:f7:3f:ae:34:4f:79:16:25:e9:b3:91:f7:a5:19:16:
+        15:e9:81:6e:69:68:0a:4f:39:ad:5f:3e:7a:07:f8:59:04:0f:
+        a8:20:3a:5c:c1:c9:0f:a2:28:0b
+
+openssl x509 -noout -text -in hda16376-16376Ipkix.pem
+Certificate:   579 bytyes
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 11986 (0x2ed2)
+        Signature Algorithm: ED25519
+        Issuer: CN=2001003ffe3ff805e805a98f9df15e2d
+        Validity
+            Not Before: Mar  2 00:01:00 2025 GMT
+            Not After : Feb 27 23:59:00 2026 GMT
+        Subject: CN=DRIP-HDA-I-16376-16376
+        Subject Public Key Info:
+            Public Key Algorithm: ED25519
+                ED25519 Public-Key:
+                pub:
+                    cc:75:d7:5d:f7:78:73:4d:2e:5b:68:2f:6f:f9:38:
+                    ab:f1:0a:10:26:f7:88:dc:a9:99:45:cb:dd:ac:f3:
+                    d7:23
+        X509v3 extensions:
+            X509v3 Subject Alternative Name: critical
+                IP Address:2001:3F:FE3F:F805:AA16:ED23:92F6:F0CB
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Certificate Policies: 
+                Policy: 1.3.27.16.1.1.0.2
+            X509v3 Subject Key Identifier: 
+                20:01:00:3F:FE:3F:F8:05:AA:16:ED:23:92:F6:F0:CB
+            X509v3 Authority Key Identifier: 
+                20:01:00:3F:FE:3F:F8:05:E8:05:A9:8F:9D:F1:5E:2D
+    Signature Algorithm: ED25519
+    Signature Value:
+        7f:e6:cb:2f:75:4e:c5:d4:21:2a:ee:9a:2a:d9:a5:c7:c3:f6:
+        53:a8:54:8d:0f:cb:04:bd:00:2b:c9:ae:9e:07:3a:6f:96:3a:
+        f6:70:54:cf:92:11:4b:fd:79:81:24:cd:be:cb:fc:4a:67:3c:
+        ca:52:99:f8:89:24:1d:49:46:04
+
+openssl x509 -in hda16376-16376I.pem -out hda16376-16376I.der -outform der
+openssl x509 -in hda16376-16376Ipkix.pem -out hda16376-16376Ipkix.der -outform der
+
+DER: 306 bytes & 386 bytes
+
+
+# create UA1
+#openssl pkey -in ua1-16376-16376Iprv.pem  -text -noout
+python csr-gen.py --keyname=ua1-16376-16376 --serialnumber=x1224AABBCCDDEE56789
+openssl req -text -noout -in ua1-16376-16376csr.pem
+python endorse.py --serverdat=hda16376-16376I-server --commandfile=ua1-16376-16376
+CA
+DET: 2001003ffe3ff805aa16ed2392f6f0cb
+DET: 2001:003f:fe3f:f805:aa16:ed23:92f6:f0cb
+Client
+DET: 2001003ffe3ff805dd4b0bad53b76779
+DET: 2001:003f:fe3f:f805:dd4b:0bad:53b7:6779
+Client HI: 8a7a47db44c6582f0e1f995d55fe5eddff0b9712445b6368e1a55f60381b4cb7
+Client Endorsement by CA( 136.0  bytes): 67c688d0699e81d02001003ffe3ff805dd4b0bad53b767798a7a47db44c6582f0e1f995d55fe5eddff0b9712445b6368e1a55f60381b4cb72001003ffe3ff805aa16ed2392f6f0cb9f6fc4b243dddf1472771ca1567a2382b86843c5f55342d68795ecaf62ce37cf059071abf0ada558a0de1e35cb22a09c941949bae44aa469b3b3f4f86126bb07
+client SN: x1224AABBCCDDEE56789
+
+openssl x509 -noout -text -in ua1-16376-16376.pem
+Certificate:   404 bytes
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 4927103 (0x4b2e7f)
+        Signature Algorithm: ED25519
+        Issuer: CN=2001003ffe3ff805aa16ed2392f6f0cb
+        Validity
+            Not Before: Mar  4 00:01:00 2025 GMT
+            Not After : Feb 25 23:59:00 2026 GMT
+        Subject: 
+        Subject Public Key Info:
+            Public Key Algorithm: ED25519
+                ED25519 Public-Key:
+                pub:
+                    8a:7a:47:db:44:c6:58:2f:0e:1f:99:5d:55:fe:5e:
+                    dd:ff:0b:97:12:44:5b:63:68:e1:a5:5f:60:38:1b:
+                    4c:b7
+        X509v3 extensions:
+            X509v3 Subject Alternative Name: critical
+                IP Address:2001:3F:FE3F:F805:DD4B:BAD:53B7:6779
+    Signature Algorithm: ED25519
+    Signature Value:
+        65:7e:3b:36:02:cb:b3:19:91:e7:d1:88:a3:8a:a1:90:fa:00:
+        89:1f:1e:17:18:91:0e:27:7b:48:f8:3c:95:fe:a0:41:a1:bc:
+        08:c8:7e:70:ae:9d:0f:0a:17:84:97:02:33:8c:f8:78:be:9c:
+        b0:27:c0:b0:b7:ba:78:9e:de:08
+
+openssl x509 -noout -text -in ua1-16376-16376pkix.pem
+Certificate:    444 bytes
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1878479 (0x1ca9cf)
+        Signature Algorithm: ED25519
+        Issuer: CN=2001003ffe3ff805aa16ed2392f6f0cb
+        Validity
+            Not Before: Mar  4 00:01:00 2025 GMT
+            Not After : Feb 25 23:59:00 2026 GMT
+        Subject: 
+        Subject Public Key Info:
+            Public Key Algorithm: ED25519
+                ED25519 Public-Key:
+                pub:
+                    8a:7a:47:db:44:c6:58:2f:0e:1f:99:5d:55:fe:5e:
+                    dd:ff:0b:97:12:44:5b:63:68:e1:a5:5f:60:38:1b:
+                    4c:b7
+        X509v3 extensions:
+            X509v3 Subject Alternative Name: critical
+                IP Address:2001:3F:FE3F:F805:DD4B:BAD:53B7:6779
+            X509v3 Authority Key Identifier: 
+                20:01:00:3F:FE:3F:F8:05:AA:16:ED:23:92:F6:F0:CB
+    Signature Algorithm: ED25519
+    Signature Value:
+        46:ad:f9:6b:e8:bb:f5:24:f9:80:d3:2a:77:5b:58:65:59:7b:
+        8f:43:e3:5e:8a:ca:44:0d:cc:ed:2b:73:62:fd:f0:5f:83:f4:
+        ac:88:8e:ae:f2:33:0b:dc:3b:98
+
+openssl x509 -in ua1-16376-16376.pem -out ua1-16376-16376.der -outform der
+openssl x509 -in ua1-16376-16376pkix.pem -out ua1-16376-16376pkix.der -outform der
+
+DER: 256 bytes & 286 bytes
+
+# create UA2
+#openssl pkey -in ua2-16376-16376Iprv.pem  -text -noout
+python csr-gen.py --keyname=ua2-16376-16376 --serialnumber=x1225
+openssl req -text -noout -in ua2-16376-16376csr.pem
+python endorse.py --serverdat=hda16376-16376I-server --commandfile=ua2-16376-16376
+CA
+DET: 2001003ffe3ff805aa16ed2392f6f0cb
+DET: 2001:003f:fe3f:f805:aa16:ed23:92f6:f0cb
+Client
+DET: 2001003ffe3ff805f64b0a656aaee568
+DET: 2001:003f:fe3f:f805:f64b:0a65:6aae:e568
+Client HI: 25740b5238019d54732fe9afa25c6994797700ba1deeeef09416d998f92e2de6
+Client Endorsement by CA( 136.0  bytes): 67c688d0699e81d02001003ffe3ff805f64b0a656aaee56825740b5238019d54732fe9afa25c6994797700ba1deeeef09416d998f92e2de62001003ffe3ff805aa16ed2392f6f0cb44bec5df1fc719ac4fd1a8e06a892767927c5291d461b5d2671d68d1807eb57de655510c14e8688fc77cd2bfb01dcf7fc9bb644e2975cad4bec5848aee818203
+client SN: x1225
+
+openssl x509 -noout -text -in ua2-16376-16376.pem
+Certificate:   404 bytes
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 6404959 (0x61bb5f)
+        Signature Algorithm: ED25519
+        Issuer: CN=2001003ffe3ff805aa16ed2392f6f0cb
+        Validity
+            Not Before: Mar  4 00:01:00 2025 GMT
+            Not After : Feb 25 23:59:00 2026 GMT
+        Subject: 
+        Subject Public Key Info:
+            Public Key Algorithm: ED25519
+                ED25519 Public-Key:
+                pub:
+                    25:74:0b:52:38:01:9d:54:73:2f:e9:af:a2:5c:69:
+                    94:79:77:00:ba:1d:ee:ee:f0:94:16:d9:98:f9:2e:
+                    2d:e6
+        X509v3 extensions:
+            X509v3 Subject Alternative Name: critical
+                IP Address:2001:3F:FE3F:F805:F64B:A65:6AAE:E568
+    Signature Algorithm: ED25519
+    Signature Value:
+        be:35:44:6a:e4:16:a7:d3:9a:d1:ae:21:b5:15:78:26:99:4e:
+        3b:a3:84:b5:46:c9:26:9c:51:41:e3:74:ec:65:81:96:9a:fb:
+        d2:b0:b3:61:72:c7:cb:4e:50:29:31:d7:e2:33:33:41:1e:c0:
+        5d:5f:8b:13:95:75:48:a9:1a:0c
+
+openssl x509 -noout -text -in ua2-16376-16376pkix.pem
+Certificate:   444 bytes
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 756600 (0xb8b78)
+        Signature Algorithm: ED25519
+        Issuer: CN=2001003ffe3ff805aa16ed2392f6f0cb
+        Validity
+            Not Before: Mar  4 00:01:00 2025 GMT
+            Not After : Feb 25 23:59:00 2026 GMT
+        Subject: 
+        Subject Public Key Info:
+            Public Key Algorithm: ED25519
+                ED25519 Public-Key:
+                pub:
+                    25:74:0b:52:38:01:9d:54:73:2f:e9:af:a2:5c:69:
+                    94:79:77:00:ba:1d:ee:ee:f0:94:16:d9:98:f9:2e:
+                    2d:e6
+        X509v3 extensions:
+            X509v3 Subject Alternative Name: critical
+                IP Address:2001:3F:FE3F:F805:F64B:A65:6AAE:E568
+            X509v3 Authority Key Identifier: 
+                20:01:00:3F:FE:3F:F8:05:AA:16:ED:23:92:F6:F0:CB
+    Signature Algorithm: ED25519
+    Signature Value:
+        34:10:d1:23:c5:6f:9c:fc:7e:39:ee:56:b5:3f:d5:7a:cc:ed:
+        3f:8e:13:6b:62:14:54:c1:65:c3:c3:c7:4d:b4:4f:48:4b:7f:
+        d1:d1:c8:d4:c1:2f:aa:c6:94:6f:fa:cd:eb:0f:26:db:fe:28:
+        34:fc:d8:0d:86:9d:f9:22:11:04
+
+openssl x509 -in ua2-16376-16376.pem -out ua2-16376-16376.der -outform der
+openssl x509 -in ua2-16376-16376pkix.pem -out ua2-16376-16376pkix.der -outform der
+
+DER: 256 bytes & 286 bytes
+
