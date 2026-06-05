@@ -1,5 +1,5 @@
-vnb="03/04/2025"
-vna="02/25/2026"
+vnb = "01/01/2026"
+vna = "31/12/2026"
 clientcsr = "ua2-16376-16376"
 clientpem = "ua2-16376-16376"
 entitycert = True
