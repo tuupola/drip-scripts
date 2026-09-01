@@ -221,7 +221,7 @@ client_public_bytes = client_csr.public_key().public_bytes(
 #client_hibytes = bytes(client_public_bytes.hex(), 'utf-8')
 #print("client_hibytes",type(client_hibytes),client_hibytes)
 print("Client")
-clientdet = det_orchid(raa, cahda, suiteid, client_public_bytes)
+clientdet = det_orchid(raa, clhda, suiteid, client_public_bytes)
 #clientdet = det_orchid(raa, clhda, suiteid, client_hibytes)
 #print("client orchid", type(clientdet),clientdet)
 
