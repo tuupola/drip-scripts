@@ -1,11 +1,13 @@
 Steps taken from `dki-dat-files/steps.dat`. First run with `--keynameexists=N` also generates the keys. T`.der` is binary representation of a `.pem` file. `.eds` is the endorsement broadcasted as DRIP Link.
 
 ## RAA
+
 ```
 $ python3 ../csr-gen.py --keyname=raa16376 --serialnumber=x2344 --keynameexists=N
 CSR Gen Version:  2024.09.17
 No RAA provided.  A DET will not be generated
 
+$ python3 ../endorse.py --serverdat=../dki-dat-files/raa16376-server-self --commandfile=../dki-dat-files/raa16376-self
 $ python3 ../endorse.py --serverdat=../dki-dat-files/raa16376-server-self --commandfile=../dki-dat-files/raa16376-self
 CA
 DET: 2001003ffe0000054fb87c2728107048
@@ -33,10 +35,10 @@ CA
 DET: 2001003ffe0000054fb87c2728107048
 DET: 2001:003f:fe00:0005:4fb8:7c27:2810:7048
 Client
-DET: 2001003ffe000005bda1f422e71a9354
-DET: 2001:003f:fe00:0005:bda1:f422:e71a:9354
+DET: 2001003ffe3ff8050325d34f5a5ad186
+DET: 2001:003f:fe3f:f805:0325:d34f:5a5a:d186
 Client HI: 50a25ed544eb6172c8d130417be7717d8b77ea839cd42f4af827fda5be846c2a
-Client Endorsement by CA( 136.0  bytes): 800b2b0d0021ec102001003ffe000005bda1f422e71a935450a25ed544eb6172c8d130417be7717d8b77ea839cd42f4af827fda5be846c2a2001003ffe0000054fb87c2728107048af6aaff8f37cb367320c5a2b76b6fe558e6f0114519bc606313e393089027d78f7d09e2ebe5b37437a9f9a44be08901db2019c4af10bb1180ce436ac9760190b
+Client Endorsement by CA( 136.0  bytes): 800b2b0d0021ec102001003ffe3ff8050325d34f5a5ad18650a25ed544eb6172c8d130417be7717d8b77ea839cd42f4af827fda5be846c2a2001003ffe0000054fb87c272810704864d2bef54919c668c8ba9579327152c7b7947b21eea49670de5d1a8fb1070001189c660176d11334c0ce15af6b5f6219d962adea380cf5e25f263575d0f65e0e
 client SN: x5589
 
 $ openssl x509 -in hda16376-16376A.pem -out hda16376-16376A.der -outform der
@@ -50,7 +52,7 @@ $ python3 ../csr-gen.py --keyname=hda16376-16376I --serialnumber=x5589 --keyname
 CSR Gen Version:  2024.09.17
 No RAA provided.  A DET will not be generated
 
-$  python3 ../endorse.py --serverdat=../dki-dat-files/hda16376-16376A-server --commandfile=../dki-dat-files/hda16376-16376I
+$ python3 ../endorse.py --serverdat=../dki-dat-files/hda16376-16376A-server --commandfile=../dki-dat-files/hda16376-16376I
 CA
 DET: 2001003ffe3ff8050325d34f5a5ad186
 DET: 2001:003f:fe3f:f805:0325:d34f:5a5a:d186
